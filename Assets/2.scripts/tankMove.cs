@@ -5,18 +5,25 @@ public class tankMove : MonoBehaviour {
 
 	public float mSpeed = 1;
 	public float rSpeed = 1;
+	Rigidbody rigidBody;
 
 	// Use this for initialization
 	void Start () {
-
+		rigidBody = GetComponent<Rigidbody> ();
 	}
 
 	// Update is called once per frame
-	void Update () {
-		float h = ControlScript.horizontal;//獲取水平軸向按鍵
-		float v = ControlScript.vertical;//獲取垂直軸向按鍵
-		transform.Translate(0,0,-mSpeed * v);//根據水平軸向按鍵來前進或後退
-		transform.Rotate(0,rSpeed * h,0);//根據垂直軸向按鍵來旋轉
+	void FixedUpdate () {
+		if (onGround) {
+			rigidBody.AddRelativeForce (ControlScript.vertical * -rSpeed * Vector3.forward);
+			rigidBody.AddTorque (ControlScript.horizontal * mSpeed * Vector3.up);
+		}
+	}
 
+	bool onGround {
+		get {
+			return Physics.Raycast (transform.position + transform.forward * 3, Vector3.down, 1.2f)
+				&& Physics.Raycast (transform.position - transform.forward * 3, Vector3.down, 1.2f); 
+		}
 	}
 }
