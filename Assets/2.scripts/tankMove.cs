@@ -13,8 +13,8 @@ public class tankMove : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		float h = Input.GetAxis ("Horizontal");//獲取水平軸向按鍵
-		float v = Input.GetAxis ("Vertical");//獲取垂直軸向按鍵
+		float h = ControlScript.horizontal;//獲取水平軸向按鍵
+		float v = ControlScript.vertical;//獲取垂直軸向按鍵
 		transform.Translate(0,0,-mSpeed * v);//根據水平軸向按鍵來前進或後退
 		transform.Rotate(0,rSpeed * h,0);//根據垂直軸向按鍵來旋轉
 
