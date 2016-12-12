@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GameScript : MonoBehaviour {
 
+	public Camera[] cameras;
 	public GameObject enemyTemplate;
 	public Text killText;
 	public float enemyMaxScale = 1f, enemyMinScale = 1f;
@@ -25,6 +26,12 @@ public class GameScript : MonoBehaviour {
 		if (Time.time - enemyShowTime >= enemyShowInterval) {
 			createRandomEnemy ();
 			enemyShowTime = Time.time;
+		}
+
+		if (!cameras [ControlScript.vision].gameObject.activeSelf) {
+			foreach (Camera cam in cameras) {
+				cam.gameObject.SetActive (cam == cameras[ControlScript.vision]);
+			}
 		}
 	}
 

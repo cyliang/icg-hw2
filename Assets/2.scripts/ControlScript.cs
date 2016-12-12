@@ -12,10 +12,12 @@ public class ControlScript : MonoBehaviour {
 	static public float elevation { get; private set; }
 	static public bool fire { get; private set; }
 	static public int selectedBullet { get; private set; }
+	static public int vision { get; private set; }
 
 	void Start() {
 		instance = this;
 		selectedBullet = 2;
+		vision = 0;
 	}
 
 	void Update() {
@@ -28,6 +30,10 @@ public class ControlScript : MonoBehaviour {
 				selectedBullet = 2;
 			else if (Input.GetKeyDown (KeyCode.Alpha3))
 				selectedBullet = 3;
+
+			if (Input.GetKeyDown (KeyCode.V)) {
+				vision = (vision + 1) % 2;
+			}
 		}
 	}
 
