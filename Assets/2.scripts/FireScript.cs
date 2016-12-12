@@ -40,7 +40,6 @@ public class FireScript : MonoBehaviour {
 			bulletTemplates[ControlScript.selectedBullet - 1], 
 			firePoint.transform.position, firePoint.transform.rotation) as Rigidbody;
 		
-		bullet.GetComponent<Renderer> ().material.color = Random.ColorHSV(0f, 1f, 0.8f, 1.0f, 0.7f, 1.0f);
 		return bullet;
 	}
 }

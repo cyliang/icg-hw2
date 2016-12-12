@@ -3,15 +3,19 @@ using System;
 using System.Collections;
 
 public class BulletBehaviour : MonoBehaviour {
-	public GameObject effect;
+	public GameObject effectTemplate;
 	public string[] targetColliders;
 	public float timeToExplode = 5;
 	public int power = 2;
 
 	float showTime;
+	Color color;
 
 	void Start () {
-		showTime = Time.time;	
+		showTime = Time.time;
+
+		color = UnityEngine.Random.ColorHSV(0f, 1f, 0.8f, 1.0f, 0.7f, 1.0f);
+		GetComponent<Renderer> ().material.color = color;
 	}	
 
 	void Update () {
@@ -27,7 +31,8 @@ public class BulletBehaviour : MonoBehaviour {
 	}
 
 	void explode() {
-		Instantiate (effect, transform.position, transform.rotation);
+		GameObject effect = Instantiate (effectTemplate, transform.position, transform.rotation) as GameObject;
+		effect.GetComponent<Renderer>().material.SetColor("_TintColor", color);
 		Destroy(gameObject);
 	}
 }
