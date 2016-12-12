@@ -10,9 +10,16 @@ public class ControlScript : MonoBehaviour {
 	static public float vertical { get; private set; }
 	static public float rotation { get; private set; }
 	static public float elevation { get; private set; }
+	static public bool fire { get; private set; }
 
 	void Start() {
 		instance = this;
+	}
+
+	void Update() {
+		if (!useScreenBtn) {
+			fire = Input.GetKeyDown (KeyCode.LeftControl);
+		}
 	}
 
 	void FixedUpdate() {
