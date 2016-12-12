@@ -5,7 +5,6 @@ public class EnemyBehaviour : MonoBehaviour {
 	
 	public float speed;
 	public float lifeCubeRotateSpeed;
-	public float minDistance;
 	public GameObject effect;
 	public GameObject lifeCube;
 
@@ -23,10 +22,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
 	void Update () {
 		transform.LookAt (player.transform, Vector3.up);
-		if (Vector3.Distance (transform.position, player.transform.position) > minDistance)
-			transform.position = Vector3.MoveTowards (transform.position, player.transform.position, speed * Time.deltaTime);
-		else
-			explode ();
+		transform.position = Vector3.MoveTowards (transform.position, player.transform.position, speed * Time.deltaTime);
 
 		Vector3 lifeRot = lifeCube.transform.localEulerAngles;
 		lifeRot.y += Time.deltaTime * lifeCubeRotateSpeed;
@@ -43,8 +39,9 @@ public class EnemyBehaviour : MonoBehaviour {
 			explode ();
 	}
 
-	void explode() {
+	public void explode() {
 		Instantiate (effect, transform.position, transform.rotation);
+		GameScript.enemyDied ();
 		Destroy(gameObject);
 	}
 }
