@@ -6,6 +6,7 @@ public class BulletBehaviour : MonoBehaviour {
 	public GameObject effect;
 	public string[] targetColliders;
 	public float timeToExplode = 5;
+	public int power = 2;
 
 	float showTime;
 
@@ -20,6 +21,7 @@ public class BulletBehaviour : MonoBehaviour {
 
 	void OnCollisionEnter (Collision collision) {
 		if(Array.IndexOf(targetColliders, collision.gameObject.tag) != -1){
+			collision.gameObject.GetComponentInParent<EnemyBehaviour> ().hit(power);
 			explode ();
 		}	
 	}

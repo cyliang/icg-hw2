@@ -8,18 +8,24 @@ public class EnemyBehaviour : MonoBehaviour {
 	public GameObject effect;
 
 	PlayerBehaviour player;
+	int life;
 
-	// Use this for initialization
 	void Start () {
 		player = PlayerBehaviour.player;
+		life = 20;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		transform.LookAt (player.transform, Vector3.up);
 		if (Vector3.Distance (transform.position, player.transform.position) > minDistance)
 			transform.position = Vector3.MoveTowards (transform.position, player.transform.position, speed * Time.deltaTime);
 		else
+			explode ();
+	}
+
+	public void hit(int hurt) {
+		life -= hurt;
+		if (life <= 0)
 			explode ();
 	}
 
