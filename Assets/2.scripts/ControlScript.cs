@@ -20,7 +20,7 @@ public class ControlScript : MonoBehaviour {
 
 	void Update() {
 		if (!useScreenBtn) {
-			fire = Input.GetKeyDown (KeyCode.LeftControl);
+			fire = Input.GetButtonDown ("Fire1");
 
 			if (Input.GetKeyDown (KeyCode.Alpha1))
 				selectedBullet = 1;
