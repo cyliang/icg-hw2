@@ -14,7 +14,7 @@ public class BulletBehaviour : MonoBehaviour {
 	}	
 
 	void Update () {
-		if (Time.time - showTime > 5)
+		if (Time.time - showTime > timeToExplode)
 			explode ();
 	}
 

@@ -5,15 +5,23 @@ public class FireScript : MonoBehaviour {
 
 	public GameObject tank;
 	public GameObject firePoint;
-	public Rigidbody projcetile;
+	public Rigidbody bulletTemplate1;
+	public Rigidbody bulletTemplate2;
+	public Rigidbody bulletTemplate3;
 	public float momentum = 30;
 
+	Rigidbody[] bulletTemplates;
 	Rigidbody tankRigidBody;
 	Collider tankCollider;
 
 	void Start () {
 		tankRigidBody = tank.GetComponent<Rigidbody> ();
 		tankCollider = tank.GetComponent<Collider> ();
+		bulletTemplates = new Rigidbody[] {
+			bulletTemplate1, 
+			bulletTemplate2,
+			bulletTemplate3
+		};
 	}
 
 	void Update () {
@@ -28,7 +36,10 @@ public class FireScript : MonoBehaviour {
 	}
 
 	Rigidbody createBullet() {
-		Rigidbody bullet = Instantiate(projcetile, firePoint.transform.position, firePoint.transform.rotation) as Rigidbody;
+		Rigidbody bullet = Instantiate(
+			bulletTemplates[ControlScript.selectedBullet - 1], 
+			firePoint.transform.position, firePoint.transform.rotation) as Rigidbody;
+		
 		bullet.GetComponent<Renderer> ().material.color = Random.ColorHSV(0f, 1f, 0.8f, 1.0f, 0.7f, 1.0f);
 		return bullet;
 	}

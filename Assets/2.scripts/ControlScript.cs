@@ -11,14 +11,23 @@ public class ControlScript : MonoBehaviour {
 	static public float rotation { get; private set; }
 	static public float elevation { get; private set; }
 	static public bool fire { get; private set; }
+	static public int selectedBullet { get; private set; }
 
 	void Start() {
 		instance = this;
+		selectedBullet = 2;
 	}
 
 	void Update() {
 		if (!useScreenBtn) {
 			fire = Input.GetKeyDown (KeyCode.LeftControl);
+
+			if (Input.GetKeyDown (KeyCode.Alpha1))
+				selectedBullet = 1;
+			else if (Input.GetKeyDown (KeyCode.Alpha2))
+				selectedBullet = 2;
+			else if (Input.GetKeyDown (KeyCode.Alpha3))
+				selectedBullet = 3;
 		}
 	}
 
