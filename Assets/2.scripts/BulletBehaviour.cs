@@ -21,7 +21,7 @@ public class BulletBehaviour : MonoBehaviour {
 
 	void OnCollisionEnter (Collision collision) {
 		if(Array.IndexOf(targetColliders, collision.gameObject.tag) != -1){
-			collision.gameObject.GetComponentInParent<EnemyBehaviour> ().hit(power);
+			collision.gameObject.GetComponent<EnemyBehaviour> ().hit(power);
 			explode ();
 		}	
 	}
